@@ -8,8 +8,8 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 {
 	// Sleep Timers
 	public static int playerInfoSleepTime = 0;
- 	public static int moveSleepTime = 500;
- 	public static int endSleepTime = 2000;
+ 	public static int moveSleepTime = 0;
+ 	public static int endSleepTime = 0;
 
  	// number of games each player will get to play as Red
  	public static int numGames =100;
@@ -42,13 +42,13 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 		img = new BufferedImage(width,height, BufferedImage.TYPE_INT_ARGB);
 		
 		// Add a player to both Player ArrayLists and then add a new Player to both ArrayLists
-	 	AIs1.add(new Test_AI_1('X'));
-	 	AIs2.add(new Test_AI_1('O'));
+	 //	AIs1.add(new Test_AI_1('X'));
+	 	//AIs2.add(new Test_AI_1('O'));
 		AIs1.add(new Test_AI_2('X'));
-	 	AIs2.add(new Test_AI_2('X'));
+	 	AIs2.add(new Test_AI_2('O'));
 
-		//AIs1.add(new HumanPlayer('X',"Tully"));
-	 	//AIs2.add(new HumanPlayer('O',"Tully"));
+		AIs1.add(new HumanPlayer('X',"Tully"));
+	 	AIs2.add(new HumanPlayer('O',"Tully"));
 	 	
 	 	// location to store a move
 		LocationInt loc;
