@@ -10,7 +10,7 @@ public class Artificial_Stupidity_1 implements PlayerInt
 	// Post: 	sets the name to "Random AI" and the letter to the letter received
 	Artificial_Stupidity_1(char letter)
 	{
-		name = "Artificial Stupidity 1";
+		name 		= "Straight Line AI";
 		this.letter	= letter;
 	}
 
@@ -61,7 +61,30 @@ public class Artificial_Stupidity_1 implements PlayerInt
 						}
 					}
 				}
-		
+		if(quadruples.size() > 0)
+		{
+			return quadruples.get(rand.nextInt(quadruples.size()));
+		}
+		else if(triples.size() > 0)
+		{
+			return triples.get(rand.nextInt(triples.size()));
+		}
+		else if(doubles.size() > 0)
+		{
+			return doubles.get(rand.nextInt(doubles.size()));
+		}
+		else if(singles.size() > 0)
+		{
+			return singles.get(rand.nextInt(singles.size()));
+		}
+		else if(zeros.size() > 0)
+		{
+			return zeros.get(rand.nextInt(zeros.size()));
+		}
+		else
+		{
+			return new Location(0,0,0);
+		}
 	}
 
 	// Pre:		method is called
