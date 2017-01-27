@@ -5,6 +5,7 @@ public class Artificial_Stupidity_1 implements PlayerInt
 {
 	private char letter;
 	private String name;
+	private int count;
 
 	// Pre:		receives a char letter
 	// Post: 	sets the name to "Random AI" and the letter to the letter received
@@ -12,6 +13,7 @@ public class Artificial_Stupidity_1 implements PlayerInt
 	{
 		name = "Artificial Stupidity 1";
 		this.letter	= letter;
+		count =-1;
 	}
 
 
@@ -95,7 +97,41 @@ public class Artificial_Stupidity_1 implements PlayerInt
 						}
 					}
 				}
-		return null;
+		if(quadruples.size()!=0)
+		{
+			Location tempLoc = quadruples.get(0);
+			quadruples.remove(0);
+			return tempLoc;
+		}
+		if(otherQuadruples.size()!=0)
+		{
+			Location tempLoc = otherQuadruples.get(0);
+			otherQuadruples.remove(0);
+			return tempLoc;
+		}
+		else
+		{
+			if(triples.size()!=0)
+			{
+				Location tempLoc = triples.get(0);
+				triples.remove(0);
+				return tempLoc;
+			}
+			else if(doubles.size()!=0)
+			{
+				Location tempLoc = doubles.get(0);
+				doubles.remove(0);
+				return tempLoc;
+			}
+			else if(singles.size()!=0)
+			{
+				Location tempLoc = singles.get(0);
+				singles.remove(0);
+				return tempLoc;
+			}
+			else
+				return new Location((int)(Math.random()*3),(int)(Math.random()*3),(int)(Math.random()*3));
+		}
 	}
 
 	// Pre:		method is called
