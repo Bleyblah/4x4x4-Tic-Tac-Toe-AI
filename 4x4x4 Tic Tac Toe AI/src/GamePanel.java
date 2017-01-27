@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
  	public static int endSleepTime = 0;
 
  	// number of games each player will get to play as Red
- 	public static int numGames =1000;
+ 	public static int numGames =50;
 
 	// List of Players
 	public ArrayList<PlayerInt> AIs1 = new ArrayList<PlayerInt>();
@@ -47,8 +47,8 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 		AIs1.add(new Test_AI_2('X'));
 	 	AIs2.add(new Test_AI_2('O'));
 
-		AIs1.add(new HumanPlayer('X',"Tully"));
-	 	AIs2.add(new HumanPlayer('O',"Tully"));
+		AIs1.add(new LolAI('X'));
+	 	AIs2.add(new LolAI('O'));
 	 	
 	 	// location to store a move
 		LocationInt loc;
