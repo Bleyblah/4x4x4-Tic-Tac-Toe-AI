@@ -5,7 +5,10 @@ public class Artificial_Stupidity_1 implements PlayerInt
 {
 	private char letter;
 	private String name;
-	private int count;
+	public static boolean isReset;
+	private int randX;
+	private int randY;
+	private int randZ;
 
 	// Pre:		receives a char letter
 	// Post: 	sets the name to "Random AI" and the letter to the letter received
@@ -13,7 +16,6 @@ public class Artificial_Stupidity_1 implements PlayerInt
 	{
 		name = "Artificial Stupidity 1";
 		this.letter	= letter;
-		count =-1;
 	}
 
 
@@ -97,40 +99,55 @@ public class Artificial_Stupidity_1 implements PlayerInt
 						}
 					}
 				}
-		if(quadruples.size()!=0)
+		if(isReset)
 		{
-			Location tempLoc = quadruples.get(0);
-			quadruples.remove(0);
-			return tempLoc;
-		}
-		if(otherQuadruples.size()!=0)
-		{
-			Location tempLoc = otherQuadruples.get(0);
-			otherQuadruples.remove(0);
-			return tempLoc;
+			isReset = false;
+			while(true)
+			{
+				randX = (int)(Math.random()*3);
+				randY = (int)(Math.random()*3);
+				randZ = (int)(Math.random()*3);
+				if(board.isEmpty(new Location(randZ,randY,randX)))
+				{
+					return new Location(randZ,randY,randX);
+				}
+			}
 		}
 		else
 		{
-			if(triples.size()!=0)
-			{
-				Location tempLoc = triples.get(0);
-				triples.remove(0);
+			if(quadruples.size()!=0)
+			{	
+				Location tempLoc = quadruples.get(0);
+				quadruples.remove(0);
 				return tempLoc;
 			}
-			else if(doubles.size()!=0)
+			if(otherQuadruples.size()!=0)
 			{
-				Location tempLoc = doubles.get(0);
-				doubles.remove(0);
-				return tempLoc;
-			}
-			else if(singles.size()!=0)
-			{
-				Location tempLoc = singles.get(0);
-				singles.remove(0);
+				Location tempLoc = otherQuadruples.get(0);
+				otherQuadruples.remove(0);
 				return tempLoc;
 			}
 			else
-				return new Location((int)(Math.random()*3),(int)(Math.random()*3),(int)(Math.random()*3));
+			{
+				if(triples.size()!=0)
+				{
+					Location tempLoc = triples.get(0);
+					triples.remove(0);
+					return tempLoc;
+				}
+				else if(doubles.size()!=0)
+				{
+					Location tempLoc = doubles.get(0);
+					doubles.remove(0);
+					return tempLoc;
+				}
+				else
+				{
+					Location tempLoc = singles.get(0);
+					singles.remove(0);
+					return tempLoc;
+				}
+			}
 		}
 	}
 

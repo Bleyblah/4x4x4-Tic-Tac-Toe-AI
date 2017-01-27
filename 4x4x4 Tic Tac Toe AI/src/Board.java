@@ -497,6 +497,7 @@ public class Board implements BoardInt
 				{
 					board[s][r][c] = '-';
 				}
+		Artificial_Stupidity_1.isReset = true;
 	}
 
 	public void draw(Graphics g)
