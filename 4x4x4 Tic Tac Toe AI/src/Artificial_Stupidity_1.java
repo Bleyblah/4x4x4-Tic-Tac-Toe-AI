@@ -1,16 +1,20 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class LolAI implements PlayerInt
+public class Artificial_Stupidity_1 implements PlayerInt
 {
 	private char letter;
 	private String name;
+	public static boolean isReset;
+	private int randX;
+	private int randY;
+	private int randZ;
 
 	// Pre:		receives a char letter
 	// Post: 	sets the name to "Random AI" and the letter to the letter received
-	LolAI(char letter)
+	Artificial_Stupidity_1(char letter)
 	{
-		name 		= "LolAI";
+		name = "Artificial Stupidity 1";
 		this.letter	= letter;
 	}
 
@@ -24,18 +28,18 @@ public class LolAI implements PlayerInt
 	// Post: 	returns the Location where the player wants to move
 	public LocationInt getMove(BoardInt board)
 	{
-		Random rand = new Random();
 		ArrayList<Location> zeros = new ArrayList<Location>();
 		ArrayList<Location> singles = new ArrayList<Location>();
 		ArrayList<Location> doubles = new ArrayList<Location>();
 		ArrayList<Location> triples = new ArrayList<Location>();
 		ArrayList<Location> quadruples = new ArrayList<Location>();
+		
+		ArrayList<Location> otherZeros = new ArrayList<Location>();
+		ArrayList<Location> otherSingles = new ArrayList<Location>();
+		ArrayList<Location> otherDoubles = new ArrayList<Location>();
+		ArrayList<Location> otherTriples = new ArrayList<Location>();
+		ArrayList<Location> otherQuadruples = new ArrayList<Location>();
 
-		ArrayList<Location> ozeros = new ArrayList<Location>();
-		ArrayList<Location> osingles = new ArrayList<Location>();
-		ArrayList<Location> odoubles = new ArrayList<Location>();
-		ArrayList<Location> otriples = new ArrayList<Location>();
-		ArrayList<Location> oquadruples = new ArrayList<Location>();
 
 		for(int x = 0; x < board.numRows(); x++)
 			for(int y = 0; y < board.numRows(); y++)
@@ -75,59 +79,75 @@ public class LolAI implements PlayerInt
 						LocationScore ls = new LocationScore(board,new Location(z,y,x),letter);
 						if(ls.getOtherQuadruples() >0)
 						{
-							oquadruples.add(new Location(z,y,x));
+							otherQuadruples.add(new Location(z,y,x));
 						}
 						else if(ls.getOtherTriples() >0)
 						{
-							otriples.add(new Location(z,y,x));
+							otherTriples.add(new Location(z,y,x));
 						}
 						else if(ls.getOtherDoubles() >0)
 						{
-							odoubles.add(new Location(z,y,x));
+							otherDoubles.add(new Location(z,y,x));
 						}
 						else if(ls.getOtherSingles() >0)
 						{
-							osingles.add(new Location(z,y,x));
+							otherSingles.add(new Location(z,y,x));
 						}
 						else
 						{
-							ozeros.add(new Location(z,y,x));
+							otherZeros.add(new Location(z,y,x));
 						}
 					}
 				}
-		if(quadruples.size() > 0)
+		if(isReset)
 		{
-			return quadruples.get(rand.nextInt(quadruples.size()));
-		}
-		if(oquadruples.size()>0)
-		{
-			return oquadruples.get(rand.nextInt(oquadruples.size()));
-		}
-		//if(otriples.size()>0)
-		//{
-		//	return otriples.get(rand.nextInt(otriples.size()));
-	//	}
-		
-		else if(triples.size() > 0)
-		{
-			return triples.get(rand.nextInt(triples.size()));
-		}
-		
-		else if(doubles.size() > 0)
-		{
-			return doubles.get(rand.nextInt(doubles.size()));
-		}
-		else if(singles.size() > 0)
-		{
-			return singles.get(rand.nextInt(singles.size()));
-		}
-		else if(zeros.size() > 0)
-		{
-			return zeros.get(rand.nextInt(zeros.size()));
+			isReset = false;
+			while(true)
+			{
+				randX = (int)(Math.random()*3);
+				randY = (int)(Math.random()*3);
+				randZ = (int)(Math.random()*3);
+				if(board.isEmpty(new Location(randZ,randY,randX)))
+				{
+					return new Location(randZ,randY,randX);
+				}
+			}
 		}
 		else
 		{
-			return new Location(0,0,0);
+			if(quadruples.size()!=0)
+			{	
+				Location tempLoc = quadruples.get(0);
+				quadruples.remove(0);
+				return tempLoc;
+			}
+			if(otherQuadruples.size()!=0)
+			{
+				Location tempLoc = otherQuadruples.get(0);
+				otherQuadruples.remove(0);
+				return tempLoc;
+			}
+			else
+			{
+				if(triples.size()!=0)
+				{
+					Location tempLoc = triples.get(0);
+					triples.remove(0);
+					return tempLoc;
+				}
+				else if(doubles.size()!=0)
+				{
+					Location tempLoc = doubles.get(0);
+					doubles.remove(0);
+					return tempLoc;
+				}
+				else
+				{
+					Location tempLoc = singles.get(0);
+					singles.remove(0);
+					return tempLoc;
+				}
+			}
 		}
 	}
 
