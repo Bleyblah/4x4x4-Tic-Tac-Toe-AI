@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
  	public static int endSleepTime = 0;
 
  	// number of games each player will get to play as Red
- 	public static int numGames =50;
+ 	public static int numGames =500;
 
 	// List of Players
 	public ArrayList<PlayerInt> AIs1 = new ArrayList<PlayerInt>();
