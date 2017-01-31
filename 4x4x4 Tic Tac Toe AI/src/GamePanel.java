@@ -47,8 +47,8 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 		AIs1.add(new Test_AI_2('X'));
 	 	AIs2.add(new Test_AI_2('O'));
 
-		AIs1.add(new HumanPlayer('X',"Tully"));
-	 	AIs2.add(new HumanPlayer('O',"Tully"));
+		AIs1.add(new LolAI('X'));
+	 	AIs2.add(new LolAI('O'));
 	 	
 	 	// location to store a move
 		LocationInt loc;
@@ -196,6 +196,16 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 			if(board.isWinner('X'))
 			{
 					System.out.println(AIs1.get(x).getName() + " wins.");
+						/*if(AIs1.get(x).getName()=="Straight Line AI")
+						{
+							repaint();
+							try {
+								Thread.sleep(5000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}*/
 					scoring.get(x).addWin();
 					scoring.get(y).addLoss();
 					
@@ -204,6 +214,16 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 			else if(board.isWinner('O'))
 			{
 				System.out.println("\t\t"+AIs1.get(y).getName() + " wins the game!!!");
+			/*	if(AIs1.get(y).getName()=="Straight Line AI")
+				{
+					repaint();
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}*/
 				scoring.get(y).addWin();
 				scoring.get(x).addLoss();
 			
@@ -224,6 +244,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 			}
 			catch(Exception e)
 			{e.getMessage();}
+			
 		}
 		
 		Long start = System.nanoTime();
