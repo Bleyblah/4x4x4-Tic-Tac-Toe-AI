@@ -97,35 +97,35 @@ public class LolAI implements PlayerInt
 				}
 		if(quadruples.size() > 0)
 		{
-			return quadruples.remove(0);
+			return quadruples.remove(rand.nextInt(quadruples.size()));
 		}
 		else if(oquadruples.size()>0)
 		{
-			return oquadruples.remove(0);
+			return oquadruples.remove(rand.nextInt(oquadruples.size()));
 		}
 		else if(triples.size() > 0)
 		{
-			return triples.remove(0);
+			return triples.remove(rand.nextInt(triples.size()));
 		}
 		else if(otriples.size() > 0)
 		{
-			return otriples.remove(0);
+			return otriples.remove(rand.nextInt(otriples.size()));
 		}
 		else if(doubles.size() > 0)
 		{
-			return doubles.remove(0);
+			return doubles.remove(rand.nextInt(doubles.size()));
 		}
 		else if(singles.size() > 0)
 		{
-			return singles.remove(0);
+			return singles.remove(rand.nextInt(singles.size()));
 		}
 		else if(zeros.size() > 0)
 		{
-			return zeros.remove(0);
+			return zeros.remove(rand.nextInt(zeros.size()));
 		}
 		else
 		{
-			return new Location(0,0,0);
+			return new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
 		}
 	
 		
