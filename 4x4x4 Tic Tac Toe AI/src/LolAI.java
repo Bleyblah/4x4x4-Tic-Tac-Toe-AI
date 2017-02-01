@@ -70,9 +70,10 @@ public class LolAI implements PlayerInt
 			for(int y = 0; y < board.numRows(); y++)
 				for(int z = 0; z < board.numRows(); z++)
 				{
-					if(board.isEmpty(new Location(z,y,x)))
-					{
+					
 						LocationScore ls = new LocationScore(board,new Location(z,y,x),letter);
+						if(board.isEmpty(new Location(z,y,x)))
+						{
 						if(ls.getOtherQuadruples() >0)
 						{
 							oquadruples.add(new Location(z,y,x));
@@ -94,39 +95,79 @@ public class LolAI implements PlayerInt
 							ozeros.add(new Location(z,y,x));
 						}
 					}
+					
 				}
-		if(quadruples.size() > 0)
+	boolean lmao=true;
+		for(int x=0;x<4;x++)
+			for(int y=0;y<4;y++)
+				for(int z=0;z<4;z++)
+				{
+		if(!board.isEmpty(new Location(z,y,x)))
 		{
-			return quadruples.remove(rand.nextInt(quadruples.size()));
+			lmao=false;
 		}
-		else if(oquadruples.size()>0)
+		
+	}
+		if(lmao)
+	return new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
+		else 
 		{
-			return oquadruples.remove(rand.nextInt(oquadruples.size()));
-		}
-		else if(triples.size() > 0)
+		Location temp=null;
+		int highScore=0;
+		for(int x=0;x<4;x++)
 		{
-			return triples.remove(rand.nextInt(triples.size()));
+			for(int y=0;y<4;y++)
+			{
+				for(int z=0;z<4;z++)
+				{
+					if(board.isEmpty(new Location(z,y,x)))
+					{
+					int score=0;
+					LocationScore lol = new LocationScore(board,new Location(z,y,x),letter);
+					if(lol.getSelfQuadruples() > 0)
+					{
+						score+=1000;
+					}
+					else if(lol.getOtherQuadruples()>0)
+					{
+						score=+750;
+					}
+					else if(lol.getSelfTriples() > 0)
+					{
+						score+=500;
+					}
+					else if(lol.getOtherTriples() > 0)
+					{
+						score+=400;
+					}
+					else if(lol.getSelfDoubles() > 0)
+					{
+						score+=200;
+					}
+					else if(lol.getSelfSingles() > 0)
+					{
+						score+=100;
+					}
+					
+					if(highScore<score)
+					{
+						highScore=score;
+						temp=new Location(x,y,z);
+					}
+					}
+					
+				}
+			}
 		}
-		else if(otriples.size() > 0)
-		{
-			return otriples.remove(rand.nextInt(otriples.size()));
-		}
-		else if(doubles.size() > 0)
-		{
-			return doubles.remove(rand.nextInt(doubles.size()));
-		}
-		else if(singles.size() > 0)
-		{
-			return singles.remove(rand.nextInt(singles.size()));
-		}
-		else if(zeros.size() > 0)
-		{
-			return zeros.remove(rand.nextInt(zeros.size()));
-		}
-		else
+		System.out.print(temp);
+		if(temp==null)
 		{
 			return new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
 		}
+		return temp;
+		}
+		
+		
 	
 		
 		
