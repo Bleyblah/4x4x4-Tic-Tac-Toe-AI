@@ -160,7 +160,11 @@ public class LolAI implements PlayerInt
 		
 		if(temp==null)
 		{
-			return new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
+			Location l;
+			do
+			{
+				l= new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
+			}while(!board.isEmpty(l));
 		}
 		;
 		return temp;
