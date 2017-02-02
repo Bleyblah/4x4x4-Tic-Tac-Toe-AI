@@ -41,8 +41,7 @@ public class LolAI implements PlayerInt
 			for(int y = 0; y < board.numRows(); y++)
 				for(int z = 0; z < board.numRows(); z++)
 				{
-					if(board.isEmpty(new Location(z,y,x)))
-					{
+					
 						LocationScore ls = new LocationScore(board,new Location(z,y,x),letter);
 						if(ls.getSelfQuadruples() >0)
 						{
@@ -64,7 +63,7 @@ public class LolAI implements PlayerInt
 						{
 							zeros.add(new Location(z,y,x));
 						}
-					}
+					
 				}
 		for(int x = 0; x < board.numRows(); x++)
 			for(int y = 0; y < board.numRows(); y++)
@@ -72,8 +71,7 @@ public class LolAI implements PlayerInt
 				{
 					
 						LocationScore ls = new LocationScore(board,new Location(z,y,x),letter);
-						if(board.isEmpty(new Location(z,y,x)))
-						{
+						
 						if(ls.getOtherQuadruples() >0)
 						{
 							oquadruples.add(new Location(z,y,x));
@@ -94,22 +92,22 @@ public class LolAI implements PlayerInt
 						{
 							ozeros.add(new Location(z,y,x));
 						}
-					}
+					
 					
 				}
-	boolean lmao=true;
+	boolean empty=true;
 		for(int x=0;x<4;x++)
 			for(int y=0;y<4;y++)
 				for(int z=0;z<4;z++)
 				{
 		if(!board.isEmpty(new Location(z,y,x)))
 		{
-			lmao=false;
+			empty=false;
 		}
 		
 	}
-		if(lmao)
-	return new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
+		if(empty)
+				return new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
 		else 
 		{
 		Location temp=null;
@@ -152,18 +150,19 @@ public class LolAI implements PlayerInt
 					if(highScore<score)
 					{
 						highScore=score;
-						temp=new Location(x,y,z);
+						temp=new Location(z,y,x);
 					}
-					}
+				}
 					
 				}
 			}
 		}
-		System.out.print(temp);
+		
 		if(temp==null)
 		{
 			return new Location(rand.nextInt(4),rand.nextInt(4),rand.nextInt(4));
 		}
+		;
 		return temp;
 		}
 		

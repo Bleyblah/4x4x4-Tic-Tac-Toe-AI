@@ -12,7 +12,7 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
  	public static int endSleepTime = 0;
 
  	// number of games each player will get to play as Red
- 	public static int numGames =1000;
+ 	public static int numGames =100;
 
 	// List of Players
 	public ArrayList<PlayerInt> AIs1 = new ArrayList<PlayerInt>();
@@ -182,7 +182,13 @@ public class GamePanel extends JPanel implements Runnable, MouseListener
 							board.setLocation(l,'O');
 						else
 						{
-							System.out.println(AIs2.get(y).getName()+" failed to move.");
+							
+							System.out.println(AIs2.get(y).getName()+" failed to move.");try {
+								Thread.sleep(55000);
+							} catch (InterruptedException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 						firstPlayersTurn = true;
 					}
